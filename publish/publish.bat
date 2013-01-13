@@ -1,0 +1,1 @@
+NuGet.exe pack -Build -Properties Configuration=Release ..\Sinbadsoft.Lib.Model\Sinbadsoft.Lib.Model.csproj
