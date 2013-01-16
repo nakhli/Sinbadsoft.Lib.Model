@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sinbadsoft")]
 [assembly: AssemblyProduct("Sinbadsoft.Lib.Model")]
-[assembly: AssemblyCopyright("Copyright © Sinbadsoft 2011-2012")]
+[assembly: AssemblyCopyright("Copyright © Sinbadsoft 2011-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -50,5 +50,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.7.2.0")]
+[assembly: AssemblyVersion("0.7.3.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

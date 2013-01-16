@@ -12,8 +12,8 @@
     <language>en-US</language>
     <owners>Sinbadsoft</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <projectUrl>https://github.com/Sinbadsoft/Sinbadsoft.Lib</projectUrl>
-    <copyright>Copyright (c) Chaker Nakhli 2010-2012. Licensed under the Apache License, Version 2.0</copyright>
+    <projectUrl>https://github.com/Sinbadsoft/Sinbadsoft.Lib.Model</projectUrl>
+    <copyright>Copyright (c) Chaker Nakhli 2010-2013. Licensed under the Apache License, Version 2.0</copyright>
     <releaseNotes>
       - CopyAll signature changed to take non generic enumerables.
     </releaseNotes>
