@@ -29,30 +29,27 @@ namespace Sinbadsoft.Lib.Model.CopyTo
             }
 
             const BindingFlags Bindings = BindingFlags.Instance | BindingFlags.Public;
-            var targetProperties = typeof(T).GetProperties(Bindings);
+            var targetProperties = typeof(T)
+                .GetProperties(Bindings)
+                .Where(p => p.CanWrite && p.GetIndexParameters().Length == 0)
+                .ToDictionary(p => p.Name, p => p);
 
-            IDictionary<string, object> sourceProperties = source is IDictionary<string, object> ? (IDictionary<string, object>)source
-                : source.GetType()
-                    .GetProperties(Bindings)
-                    .Where(sp => sp.CanRead)
-                    .ToDictionary(sp => sp.Name, sp => sp.GetValue(source, null));
-
-            foreach (var targetProperty in targetProperties)
-            {
-                object sourceValue;
-                if (!targetProperty.CanWrite
-                    || !sourceProperties.TryGetValue(targetProperty.Name, out sourceValue)
-                    || sourceValue == null)
-                {
-                    continue;
-                }
-
-                object targetValue;
-                if (ValueConverter.TryConvert(sourceValue, targetProperty.PropertyType, out targetValue))
-                {
-                    targetProperty.SetValue(target, targetValue, null);
-                }
-            }
+            ObjectConversionHelper.ProcessProperties(
+                source,
+                (key, val) =>
+                    {
+                        PropertyInfo targetProperty;
+                        if (!targetProperties.TryGetValue(key, out targetProperty))
+                        {
+                            return;
+                        }
+                        
+                        object targetValue;
+                        if (ValueConverter.TryConvert(val, targetProperty.PropertyType, out targetValue))
+                        {
+                            targetProperty.SetValue(target, targetValue, null);
+                        }
+                    });
 
             return target;
         }

@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="CopyTo\CopyObjectExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ObjectConversionHelper.cs" />
     <Compile Include="ToExpando\ToExpandoExtension.cs" />
     <Compile Include="ValueConverter.cs" />
   </ItemGroup>

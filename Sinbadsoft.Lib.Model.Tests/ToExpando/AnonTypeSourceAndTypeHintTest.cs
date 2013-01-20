@@ -1,4 +1,4 @@
-// <copyright file="ToExpandoWithAnonTypeSourceAndTypeHintTest.cs" company="Sinbadsoft">
+// <copyright file="AnonTypeSourceAndTypeHintTest.cs" company="Sinbadsoft">
 // Copyright (c) Chaker Nakhli 2012
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 // this file except in compliance with the License. You may obtain a copy of the 
@@ -21,7 +21,7 @@ using Sinbadsoft.Lib.Model.ToExpando;
 namespace Sinbadsoft.Lib.Model.Tests.ToExpando
 {
     [TestFixture]
-    public class ToExpandoWithAnonTypeSourceAndTypeHintTest
+    public class AnonTypeSourceAndTypeHintTest
     {
         [Test]
         public void IntToEnum()
@@ -57,17 +57,17 @@ namespace Sinbadsoft.Lib.Model.Tests.ToExpando
         [Test]
         public void DateTimeToNullableDateTime()
         {
-            var guid = new DateTime(1078, 10, 30, 21, 0, 0);
-            dynamic result = new { Bar = guid }.ToExpando(new { Bar = typeof(DateTime?) });
-            Assert.AreEqual(guid, result.Bar);
+            var value = new DateTime(1078, 10, 30, 21, 0, 0);
+            dynamic result = new { Bar = value }.ToExpando(new { Bar = typeof(DateTime?) });
+            Assert.AreEqual(value, result.Bar);
         }
 
         [Test]
         public void NullableDateTimeToDateTime()
         {
-            DateTime? guid = new DateTime(1078, 10, 30, 21, 0, 0);
-            dynamic result = new { Bar = guid }.ToExpando(new { Bar = typeof(DateTime) });
-            Assert.AreEqual(guid, result.Bar);
+            DateTime? value = new DateTime(1078, 10, 30, 21, 0, 0);
+            dynamic result = new { Bar = value }.ToExpando(new { Bar = typeof(DateTime) });
+            Assert.AreEqual(value, result.Bar);
         }
     }
 }

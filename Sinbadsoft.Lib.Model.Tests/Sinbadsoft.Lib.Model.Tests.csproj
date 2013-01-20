@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConvertAssert.cs" />
+    <Compile Include="CopyTo\DictionarySourceTest.cs" />
+    <Compile Include="CopyTo\DataRecordSourceTest.cs" />
     <Compile Include="CopyTo\ExpandoSourceTest.cs" />
     <Compile Include="CopyTo\TypedSourceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

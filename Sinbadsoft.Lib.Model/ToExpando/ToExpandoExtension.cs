@@ -37,10 +37,9 @@ namespace Sinbadsoft.Lib.Model.ToExpando
         /// is created and returned. Keys are converted to strings if they are not of type <see cref="String"/>.
         /// </description></item>
         /// <item><description>
-        /// <see cref="IDataReader"/> then a new expando objet with the same column name-value pair of the current rader
-        /// row is created and returned. No <see cref="IDataReader.Read()"/> call is made 
-        /// and all <see cref="DBNull"/> values are converted to <see langword="null"/> or to the default
-        /// value of the hinted type if the type hint <paramref name="typeHint"/> parameter is provided.
+        /// <see cref="IDataRecord"/> then a new expando objet with the same column name-value pair of the current rader
+        /// row is created and returned. All <see cref="DBNull"/> values are converted to <see langword="null"/> or to the default
+        /// value of the hint type if a <paramref name="typeHint"/> parameter is provided.
         /// </description></item>
         /// </list>
         /// </summary>
@@ -75,59 +74,10 @@ namespace Sinbadsoft.Lib.Model.ToExpando
             var result = new ExpandoObject();
             var resultDictionary = result as IDictionary<string, object>;
 
-            var collection = obj as NameValueCollection;
-            if (collection != null)
-            {
-                foreach (string key in collection)
-                {
-                    if (FilterProperty(includeLookup, excludeLookup, key))
-                    {
-                        resultDictionary[key] = ChangeType(key, collection[key], types);
-                    }
-                }
-
-                return result;
-            }
-
-            var reader = obj as IDataReader;
-            if (reader != null)
-            {
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-                    var property = reader.GetName(i);
-                    if (FilterProperty(includeLookup, excludeLookup, property))
-                    {
-                        var value = reader[i];
-                        resultDictionary.Add(property, DBNull.Value == value ? null : ChangeType(property, value, types));
-                    }
-                }
-
-                return result;
-            }
-
-            if (obj is IDictionary || ImplementsRawGeneric(typeof(IDictionary<,>), obj.GetType()))
-            {
-                dynamic dictionary = obj;
-                foreach (var pair in dictionary)
-                {
-                    var key = pair.Key.ToString();
-                    if (FilterProperty(includeLookup, excludeLookup, key))
-                    {
-                        resultDictionary.Add(key, ChangeType(key, pair.Value, types));
-                    }
-                }
-
-                return result;
-            }
-
-            var properties = obj.GetType()
-                .GetProperties()
-                .Where(p => p.CanRead && p.GetIndexParameters().Length == 0 && FilterProperty(includeLookup, excludeLookup, p.Name));
-            foreach (var property in properties)
-            {
-                resultDictionary.Add(property.Name, ChangeType(property.Name, property.GetValue(obj, null), types));
-            }
-
+            ObjectConversionHelper.ProcessProperties(
+                obj,
+                (key, val) => resultDictionary[key] = ChangeType(key, val, types),
+                key => FilterProperty(includeLookup, excludeLookup, key));
             return result;
         }
 
@@ -144,14 +94,6 @@ namespace Sinbadsoft.Lib.Model.ToExpando
             return types != null
                    && types.TryGetValue(property, out targetType)
                    && ValueConverter.TryConvert(value, targetType, out convertedValue) ? convertedValue : value;
-        }
-
-        private static bool ImplementsRawGeneric(Type generic, Type toCheck)
-        {
-            Type[] interfaces = toCheck.GetInterfaces();
-            return interfaces
-                .Select(interfaceType => interfaceType.IsGenericType ? interfaceType.GetGenericTypeDefinition() : interfaceType)
-                .Any(current => generic == current);
         }
     }
 }

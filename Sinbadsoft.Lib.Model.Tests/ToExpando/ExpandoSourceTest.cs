@@ -1,5 +1,5 @@
-// <copyright file="ToExpandoWithExpandoSourceTest.cs" company="Sinbadsoft">
-// Copyright (c) Chaker Nakhli 2012
+// <copyright file="ExpandoSourceTest.cs" company="Sinbadsoft">
+// Copyright (c) Chaker Nakhli 2012-2013
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 // this file except in compliance with the License. You may obtain a copy of the 
 // License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by 
@@ -22,7 +22,7 @@ using Sinbadsoft.Lib.Model.ToExpando;
 namespace Sinbadsoft.Lib.Model.Tests.ToExpando
 {
     [TestFixture]
-    public class ToExpandoWithExpandoSourceTest
+    public class ExpandoSourceTest
     {
         [Test]
         public void PropertySetPreservedAndSourceNotModified()

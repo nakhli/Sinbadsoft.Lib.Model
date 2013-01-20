@@ -39,18 +39,25 @@ namespace Sinbadsoft.Lib.Model
                 return true;
             }
 
+            Type sourceType = value.GetType();
+            if (targetType == sourceType || targetType.IsAssignableFrom(sourceType))
+            {
+                result = value;
+                return true;
+            }
+
             if (targetType == typeof(Guid))
             {
                 return TryConvertToGuid(value, ref result);
             }
 
-            if (targetType == typeof(byte[]) && value.GetType() == typeof(Guid))
+            if (targetType == typeof(byte[]) && sourceType == typeof(Guid))
             {
                 result = ((Guid)value).ToByteArray();
                 return true;
             }
 
-            if (targetType == typeof(TimeSpan) && value.GetType() == typeof(string))
+            if (targetType == typeof(TimeSpan) && sourceType == typeof(string))
             {
                 TimeSpan timeSpan;
                 if (!TimeSpan.TryParse((string)value, format, out timeSpan))
@@ -62,7 +69,7 @@ namespace Sinbadsoft.Lib.Model
                 return true;
             }
 
-            if (targetType == typeof(string) && value.GetType() == typeof(TimeSpan))
+            if (targetType == typeof(string) && sourceType == typeof(TimeSpan))
             {
                 result = ((TimeSpan)value).ToString();
                 return true;
@@ -128,16 +135,24 @@ namespace Sinbadsoft.Lib.Model
             return false;
         }
 
-        private static bool TryConvertToEnum(object value, Type targetType, ref object result)
+        private static bool TryConvertToEnum(object value, Type enumType, ref object result)
         {
-            value = Convert.ChangeType(value, Enum.GetUnderlyingType(targetType));
-            if (targetType.IsEnumDefined(value))
+            try
             {
-                result = Enum.ToObject(targetType, value);
+                result = value.GetType() == typeof(string)
+                    ? Enum.Parse(enumType, (string)value)
+                    : Enum.ToObject(enumType, value);
+
                 return true;
             }
-
-            return false;
+            catch (ArgumentException)
+            {
+                return false;
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
         }
 
         private static bool TryConvertDefault(object value, Type targetType, ref object result, IFormatProvider format = null)

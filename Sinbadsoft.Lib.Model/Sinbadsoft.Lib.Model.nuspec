@@ -15,7 +15,10 @@
     <projectUrl>https://github.com/Sinbadsoft/Sinbadsoft.Lib.Model</projectUrl>
     <copyright>Copyright (c) Chaker Nakhli 2010-2013. Licensed under the Apache License, Version 2.0</copyright>
     <releaseNotes>
-      - CopyAll signature changed to take non generic enumerables.
+      - ToExpando takes more generic interface IDataRecord instead of IDataReader.
+      - CopyTo takes IDataRecord and non generic dictionaries as source objects.
+      - Fixed bug in Value converter when target and source type are the same.
+      - More tests, better coverage.
     </releaseNotes>
   </metadata>
 </package>
