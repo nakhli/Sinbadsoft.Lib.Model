@@ -142,7 +142,6 @@ namespace Sinbadsoft.Lib.Model
                 result = value.GetType() == typeof(string)
                     ? Enum.Parse(enumType, (string)value)
                     : Enum.ToObject(enumType, value);
-
                 return true;
             }
             catch (ArgumentException)
@@ -159,6 +158,12 @@ namespace Sinbadsoft.Lib.Model
         {
             try
             {
+                if (targetType == typeof(string))
+                {
+                    result = Convert.ToString(value, format);
+                    return true;
+                }
+
                 result = Convert.ChangeType(value, targetType, format);
                 return true;
             }

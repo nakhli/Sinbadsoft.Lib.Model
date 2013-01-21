@@ -64,6 +64,31 @@ namespace Sinbadsoft.Lib.Model.Tests
             CheckConvertToAndFrom(guid, guid.ToByteArray());
         }
 
+        [Test]
+        public void GuidToAndFromString()
+        {
+            var guid = new Guid("21EC2020-3AEA-1069-A2DD-08002B30309D");
+            CheckConvertToAndFrom(guid, guid.ToString());
+        }
+
+        [Test]
+        public void EnumToAndFromUnderlyingType()
+        {
+            CheckConvertToAndFrom(TargetType.TestEnum.Three, 3);
+        }
+
+        [Test]
+        public void EnumToAndFromNotUnderlyingType()
+        {
+            CheckConvertToAndFrom(TargetType.TestEnum.Three, (long)3);
+        }
+
+        [Test]
+        public void EnumToAndFromString()
+        {
+            CheckConvertToAndFrom(TargetType.TestEnum.Three, "Three");
+        }
+
         private static void CheckConvertToAndFrom<T1, T2>(T1 value1, T2 value2, IFormatProvider format = null)
         {
             ConvertAssert.IsConvertedTo(value1, value2, format);
