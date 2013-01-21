@@ -68,9 +68,9 @@ or a white list:
 userExpando = user.ToExpando(whitelist: new[] { "Name", "Role" });
 ```
 
-A different target type can be specified for a given source property. In the following example, the created expando has `UniqueId` property of type `string`, converted form the original `UniqueId` property of type `Guid`.
+A different target type can be specified for a given source property. In the following example, the created expando has `UniqueId` property of type `byte[]`, converted form the original `UniqueId` property of type `Guid`.
 ```
-userExpando = user.ToExpando(new { UniqueId = typeof(string) });
+userExpando = user.ToExpando(new { UniqueId = typeof(byte[]) });
 ```
 # Related projects
 * [automapper](https://github.com/AutoMapper/AutoMapper)
