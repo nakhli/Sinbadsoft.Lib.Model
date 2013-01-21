@@ -31,6 +31,20 @@ namespace Sinbadsoft.Lib.Model.Tests.ToExpando
         }
 
         [Test]
+        public void DbNullToInt()
+        {
+            dynamic result = new { Foo = DBNull.Value }.ToExpando(new { Foo = typeof(int) });
+            Assert.AreEqual(0, result.Foo);
+        }
+
+        [Test]
+        public void DbNullToObject()
+        {
+            dynamic result = new { Foo = DBNull.Value }.ToExpando(new { Foo = typeof(object) });
+            Assert.AreEqual(null, result.Foo);
+        }
+
+        [Test]
         public void BytesToGuid()
         {
             var guid = new Guid("21EC2020-3AEA-1069-A2DD-08002B30309D");

@@ -15,11 +15,7 @@
     <projectUrl>https://github.com/Sinbadsoft/Sinbadsoft.Lib.Model</projectUrl>
     <copyright>Copyright (c) Chaker Nakhli 2010-2013. Licensed under the Apache License, Version 2.0</copyright>
     <releaseNotes>
-      - ToExpando takes more generic interface IDataRecord instead of IDataReader.
-      - CopyTo takes IDataRecord and non generic dictionaries as source objects.
-      - Fixed bug in Value converter when target and source type are the same.
-      - Use Convert.ToString instead of Convert.ChangeType when target type is string
-      - More tests, better coverage.
+      - Fix DbNull.Value sometimes dosen't get converted to null
     </releaseNotes>
   </metadata>
 </package>

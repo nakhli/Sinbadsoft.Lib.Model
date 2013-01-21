@@ -116,6 +116,13 @@ namespace Sinbadsoft.Lib.Model.Tests.CopyTo
             var obj = new object();
             source.ObjPty = obj;
             Assert.AreEqual(obj, sourceAsObject.CopyTo<TargetType>().ObjPty);
+
+            // DBNull.value
+            source.ObjPty = DBNull.Value;
+            Assert.AreEqual(null, sourceAsObject.CopyTo<TargetType>().ObjPty);
+
+            source.IntPty = DBNull.Value;
+            Assert.AreEqual(0, sourceAsObject.CopyTo<TargetType>().IntPty);
         }
     }
 }

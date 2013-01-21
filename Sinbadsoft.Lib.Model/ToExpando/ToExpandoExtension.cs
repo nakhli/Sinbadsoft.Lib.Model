@@ -89,6 +89,7 @@ namespace Sinbadsoft.Lib.Model.ToExpando
 
         private static object ChangeType(string property, object value, IDictionary<string, Type> types)
         {
+            value = value == DBNull.Value ? null : value;
             Type targetType;
             object convertedValue;
             return types != null

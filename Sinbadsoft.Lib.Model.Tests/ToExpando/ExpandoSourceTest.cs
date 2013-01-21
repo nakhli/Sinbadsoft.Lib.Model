@@ -52,5 +52,12 @@ namespace Sinbadsoft.Lib.Model.Tests.ToExpando
             Assert.AreEqual(valueBaz, source.Baz);
             Assert.AreEqual(valueFuu, source.Fuu);
         }
+
+        [Test]
+        public void DbNullTest()
+        {
+            dynamic result = new { Foo = DBNull.Value }.ToExpando();
+            Assert.AreEqual(null, result.Foo);
+        }
     }
 }
