@@ -18,6 +18,7 @@
       - ToExpando takes more generic interface IDataRecord instead of IDataReader.
       - CopyTo takes IDataRecord and non generic dictionaries as source objects.
       - Fixed bug in Value converter when target and source type are the same.
+      - Use Convert.ToString instead of Convert.ChangeType when target type is string
       - More tests, better coverage.
     </releaseNotes>
   </metadata>
