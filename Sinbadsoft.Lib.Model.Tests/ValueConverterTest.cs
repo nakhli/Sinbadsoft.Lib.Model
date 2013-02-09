@@ -58,6 +58,16 @@ namespace Sinbadsoft.Lib.Model.Tests
         }
 
         [Test]
+        public void DateTimeToAndFromLong()
+        {
+            var dateTime = new DateTime(1978, 10, 30, 21, 15, 30, DateTimeKind.Local);
+            CheckConvertToAndFrom(dateTime, dateTime.ToBinary());
+
+            dateTime = new DateTime(1978, 10, 30, 21, 15, 30, DateTimeKind.Utc);
+            CheckConvertToAndFrom(dateTime, dateTime.ToBinary());
+        }
+
+        [Test]
         public void GuidToAndFromByteArray()
         {
             var guid = new Guid("21EC2020-3AEA-1069-A2DD-08002B30309D");

@@ -75,6 +75,18 @@ namespace Sinbadsoft.Lib.Model
                 return true;
             }
 
+            if (targetType == typeof(long) && sourceType == typeof(DateTime))
+            {
+                result = ((DateTime)value).ToBinary();
+                return true;
+            }
+
+            if (targetType == typeof(DateTime) && sourceType == typeof(long))
+            {
+                result = DateTime.FromBinary((long)value);
+                return true;
+            }
+
             if (targetType.IsEnum)
             {
                 return TryConvertToEnum(value, targetType, ref result);
