@@ -1,3 +1,9 @@
+# Installation
+A [nuget](http://nuget.org/packages/Sinbadsoft.Lib.Model) is available, just run the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console):
+```powershell
+Install-Package Sinbadsoft.Lib.Model
+```
+
 #Simple zero-config convention-based object to object mapper.
 
 This library uses reflection to copy prperties of object of type `A` to object of type `B` based on property name.
@@ -76,6 +82,6 @@ userExpando = user.ToExpando(new { UniqueId = typeof(byte[]) });
 * [automapper](https://github.com/AutoMapper/AutoMapper)
 
 # License
-Copyright 2012-2013 [Sinbasdoft](http://www.sinbadsoft.com).
+Copyright 2012-2013 [Sinbadsoft](http://www.sinbadsoft.com).
 
 Licensed under the Apache License, [Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
